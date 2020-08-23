@@ -27,18 +27,19 @@
     <div class="container" style="padding: 100px">
         <h2 class="text-center">Login</h2>
         <br/>
-
-        <form:form method="POST" action="login.do">
+        
+        <%--@elvariable id="loginForm" type="java"--%>
+        <form:form modelAttribute="loginForm" method="POST" action="login.do">
             <form:errors cssClass="error" /> <br />
             <div class="form-group">
-<%--                <label for="id">Email</label>--%>
-<%--                <form:input path="id" type="text" />--%>
-                <form:errors path="id" cssClass="error" />
+                <label for="name">Name</label>
+                <form:input path="name" type="text" />
+                <form:errors path="name" cssClass="error" />
             </div>
 
             <div class="form-group">
-<%--                <label for="password">Password</label>--%>
-<%--                <form:input path="password" type="password" />--%>
+                <label for="password">Password</label>
+                <form:input path="password" type="password" />
                 <form:errors path="password" cssClass="error" />
             </div>
             <br />

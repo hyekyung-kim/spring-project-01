@@ -37,4 +37,8 @@ public class Member {
     public String getRole() {
         return role;
     }
+
+    public boolean matchPassword(String inputPassword) {
+        return password.equals(inputPassword);
+    }
 }

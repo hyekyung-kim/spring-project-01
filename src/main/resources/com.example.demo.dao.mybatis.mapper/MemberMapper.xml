@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- MemberMapper 인터페이스의 package이름과 같아야 함 -->
+<mapper namespace="com.example.demo.dao.mybatis.mapper.MemberMapper">
+
+  <select id="getMember" resultType="Member">
+    SELECT id, name, password, role
+    FROM member
+    WHERE name = #{name}
+      AND password = #{password}
+  </select>
+
+  <select id="getMemberByName" resultType="Member">
+    SELECT id, name, password, role
+    FROM member
+    WHERE name = #{name}
+  </select>
+
+
+</mapper>
