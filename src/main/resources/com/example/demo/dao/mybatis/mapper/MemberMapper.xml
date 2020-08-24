@@ -5,14 +5,14 @@
 <!-- MemberMapper 인터페이스의 package이름과 같아야 함 -->
 <mapper namespace="com.example.demo.dao.mybatis.mapper.MemberMapper">
 
-  <select id="getMember" resultType="Member">
+  <select id="getMember" resultType="com.example.demo.domain.Member">
     SELECT id, name, password, role
     FROM member
     WHERE name = #{name}
       AND password = #{password}
   </select>
 
-  <select id="getMemberByName" resultType="Member">
+  <select id="getMemberByName" resultType="com.example.demo.domain.Member">
     SELECT id, name, password, role
     FROM member
     WHERE name = #{name}

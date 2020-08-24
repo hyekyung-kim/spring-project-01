@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.Member;
 
-@SuppressWarnings("serial")
 public class MemberSession {
     private Member member;
 

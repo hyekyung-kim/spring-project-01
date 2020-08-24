@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class MybatisMemberDao implements MemberDao {
 
+    @Autowired
     private MemberMapper memberMapper;
 
     public Member getMember(String name, String password){

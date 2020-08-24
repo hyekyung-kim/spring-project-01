@@ -36,14 +36,14 @@ public class LoginController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String form() {
-
+        System.out.println("로그인 페이지!");
         return formViewName;
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView handleRequest(HttpServletRequest request, HttpSession session,
                                       @ModelAttribute("loginForm") LoginForm loginForm, Model model) throws Exception {
-        System.out.println("!");
+        System.out.println("로그인 시도!");
 //        new LoginFormValidator().validate(loginForm, bindingResult);
 
         // 검증 오류 발생 시 다시 form view로 이동
@@ -59,10 +59,12 @@ public class LoginController {
             authenticator.authenticate(loginForm); // email과 password가 맞는지 검증
             MemberSession memberSession = new MemberSession(member);
             session.setAttribute("memberSession", memberSession);
+            System.out.println("로그인 성공!");
             return new ModelAndView("index");
         } catch (AuthenticationException e) { // 검증 실패 시
             ModelAndView mav = new ModelAndView();
 
+            System.out.println("로그인 실패!");
             mav.addObject("loginForm", loginForm);
             mav.setViewName(formViewName); // login form 이동
             return mav;
