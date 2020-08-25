@@ -33,5 +33,7 @@ public class MemberServiceImpl implements MemberService {
         return memberDao.getMemberByName(name);
     }
 
-
+    public List<String> getRoleByName(String name){
+        return memberDao.getRoleByName(name);
+    }
 }

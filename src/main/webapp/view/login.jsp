@@ -8,7 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <html>
@@ -17,7 +17,7 @@
 </head>
 
 <style>
-    .error {
+    .error, p {
         color: #ff0000;
         /* font-weight: bold; */
     }
@@ -29,7 +29,7 @@
         <br/>
         
         <%--@elvariable id="loginForm" type="java"--%>
-        <form:form modelAttribute="loginForm" method="POST" action="login.do">
+        <form:form modelAttribute="loginForm" method="POST" action="/signin">
             <form:errors cssClass="error" /> <br />
             <div class="form-group">
                 <label for="name">Name</label>
@@ -43,12 +43,19 @@
                 <form:errors path="password" cssClass="error" />
             </div>
             <br />
+            <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+                <p>로그인 실패: <br/>
+                        ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p>
+                <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
+            </c:if>
 
             <div class="form-group" align="center">
                 <input type="submit" value="로그인">
             </div>
 
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         </form:form>
+
     </div>
 </body>
 </html>

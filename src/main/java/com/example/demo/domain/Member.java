@@ -1,10 +1,16 @@
 package com.example.demo.domain;
 
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.Collection;
+
 public class Member {
     int id;
     String name;
     String password;
     String role;
+
+    private Collection<? extends GrantedAuthority> authorities;
 
     public void setId(int id) {
         this.id = id;
@@ -39,6 +45,15 @@ public class Member {
     }
 
     public boolean matchPassword(String inputPassword) {
-        return password.equals(inputPassword);
+        return this.password.equals(inputPassword);
     }
+
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+        this.authorities = authorities;
+    }
+
 }

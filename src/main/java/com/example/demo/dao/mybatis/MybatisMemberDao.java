@@ -6,6 +6,8 @@ import com.example.demo.domain.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class MybatisMemberDao implements MemberDao {
 
@@ -18,5 +20,9 @@ public class MybatisMemberDao implements MemberDao {
 
     public Member getMemberByName(String name){
         return memberMapper.getMemberByName(name);
+    }
+
+    public List<String> getRoleByName(String name){
+        return memberMapper.getRoleByName(name);
     }
 }

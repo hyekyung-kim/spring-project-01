@@ -18,5 +18,9 @@
     WHERE name = #{name}
   </select>
 
-
+  <select id="getRoleByName" resultType="String" parameterType="String">
+    SELECT role
+    FROM member
+    WHERE name = #{name}
+  </select>
 </mapper>
