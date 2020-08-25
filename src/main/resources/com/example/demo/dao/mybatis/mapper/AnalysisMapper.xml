@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- AnalysisMapper 인터페이스의 package이름과 같아야 함 -->
+<mapper namespace="com.example.demo.dao.mybatis.mapper.AnalysisMapper">
+
+  <select id="getAnalysisList" resultType="com.example.demo.domain.AnalysisRequest">
+    SELECT id, req_name, req_date
+    FROM analysis_request
+    ORDER BY req_date ASC;
+  </select>
+
+</mapper>

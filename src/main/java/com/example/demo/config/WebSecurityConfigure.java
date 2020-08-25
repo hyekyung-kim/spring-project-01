@@ -1,6 +1,6 @@
 package com.example.demo.config;
 
-import com.example.demo.service.CustomUserDetailsService;
+import com.example.demo.service.impl.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +23,7 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().and().authorizeRequests()
                 .antMatchers("/signin/process").permitAll()
-                .antMatchers("/request-analyze").permitAll()
+                .antMatchers("/request-analysis").permitAll()
                 .antMatchers("/index").hasRole("ADMIN")
                 .antMatchers("/manage-request").hasRole("ADMIN")
                 .and().logout().permitAll()

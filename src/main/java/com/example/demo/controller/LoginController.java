@@ -20,7 +20,10 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
 
     @Value("login")
-    private String formViewName;
+    private String loginViewName;
+
+    @Value("index")
+    private String indexViewName;
 
     @Autowired
     private MemberService memberService;
@@ -33,7 +36,7 @@ public class LoginController {
     @RequestMapping(value="/login", method = RequestMethod.GET)
     public String form() {
         System.out.println("로그인 페이지!");
-        return formViewName;
+        return loginViewName;
     }
 
     @RequestMapping(value="/signin/process")
@@ -47,28 +50,16 @@ public class LoginController {
 //            return new ModelAndView(formViewName);
 //        }
 //
-//        Member member = memberService.getMember(loginForm.getName(), loginForm.getPassword());
-//
-//        System.out.println("LoginForm : " + loginForm);
-//        ModelAndView mav = new ModelAndView();
-//        try {
-//            authenticator.authenticate(loginForm); // name과 password가 맞는지 검증
-//
-//            MemberSession memberSession = new MemberSession(member);
-//            session.setAttribute("memberSession", memberSession);
-//            System.out.println("로그인 성공!");
-//            mav.setViewName("index");
-//            return mav;
-//        } catch (AuthenticationException e) { // 검증 실패 시
-//
-//            System.out.println("로그인 실패!");
-//            mav.addObject("loginForm", loginForm);
-//            mav.setViewName(formViewName); // login form 이동
-//            return mav;
-//        }
+        Member member = memberService.getMember(loginForm.getName(), loginForm.getPassword());
 
+        System.out.println("LoginForm : " + loginForm);
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("index");
+
+        MemberSession memberSession = new MemberSession(member);
+        session.setAttribute("memberSession", memberSession);
+        System.out.println("로그인 성공!");
+        mav.setViewName(indexViewName);
         return mav;
+
     }
 }

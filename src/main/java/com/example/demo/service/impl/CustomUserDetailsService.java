@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.service.impl;
 
 import com.example.demo.dao.mybatis.mapper.MemberMapper;
 import com.example.demo.domain.Member;

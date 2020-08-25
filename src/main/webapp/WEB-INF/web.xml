@@ -5,6 +5,10 @@
 						http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          id="WebApp_ID" version="3.1">
     <display-name>Login Mode</display-name>
+    <context-param>
+        <param-name/>
+        <param-value/>
+    </context-param>
 
     <servlet>
         <servlet-name>servlet</servlet-name>
