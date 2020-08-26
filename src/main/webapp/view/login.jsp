@@ -22,10 +22,14 @@
         /* font-weight: bold; */
     }
 </style>
-
+<script>
+    function requestSubmit(){
+        location.href="/request/page";
+    }
+</script>
 <body>
     <div class="container" style="padding: 100px">
-        <h2 class="text-center">Login</h2>
+        <h2>Login</h2>
         <br/>
         
         <%--@elvariable id="loginForm" type="java"--%>
@@ -55,6 +59,8 @@
 
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         </form:form>
+
+        <input type="button" value="분석 요청" onClick="requestSubmit()">
 
     </div>
 </body>

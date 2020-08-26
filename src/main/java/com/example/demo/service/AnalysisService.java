@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface AnalysisService {
     List<AnalysisRequest> getAnalysisList();
+
+    void insertAnalysis(AnalysisRequest analysisRequest);
 }

@@ -20,4 +20,9 @@ public class AnalysisServiceImpl implements AnalysisService {
     public List<AnalysisRequest> getAnalysisList() {
         return analysisDao.getAnalysisList();
     }
+
+    @Override
+    public void insertAnalysis(AnalysisRequest analysisRequest){
+        analysisDao.insertAnalysis(analysisRequest);
+    }
 }

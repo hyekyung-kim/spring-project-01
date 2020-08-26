@@ -10,4 +10,6 @@ import java.util.List;
 @Mapper
 public interface AnalysisMapper {
     List<AnalysisRequest> getAnalysisList();
+
+    void insertAnalysis(AnalysisRequest analysisRequest);
 }

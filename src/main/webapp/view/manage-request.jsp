@@ -41,6 +41,12 @@
 
     table {
         border-collapse: collapse;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    td {
+       width: 120px;
     }
 
 </style>

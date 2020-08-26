@@ -6,9 +6,22 @@
 <mapper namespace="com.example.demo.dao.mybatis.mapper.AnalysisMapper">
 
   <select id="getAnalysisList" resultType="com.example.demo.domain.AnalysisRequest">
-    SELECT id, req_name, req_date
+    SELECT id, req_name as reqName, req_date as reqDate
     FROM analysis_request
     ORDER BY req_date ASC;
   </select>
+
+  <insert id="insertAnalysis" parameterType="com.example.demo.domain.AnalysisRequest">
+    INSERT INTO analysis_request (id, req_name, req_date)
+    select case count(*) when 0 then 1 else max(id) + 1 end,
+            #{reqName}, #{reqDate}
+    from analysis_request;
+
+    <selectKey keyProperty="id" resultType="int" order="AFTER">
+      SELECT max(id) as id from analysis_request;
+    </selectKey>
+
+  </insert>
+
 
 </mapper>

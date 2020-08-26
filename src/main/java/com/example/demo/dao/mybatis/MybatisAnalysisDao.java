@@ -17,4 +17,8 @@ public class MybatisAnalysisDao implements AnalysisDao {
     public List<AnalysisRequest> getAnalysisList(){
         return analysisMapper.getAnalysisList();
     }
+
+    public void insertAnalysis(AnalysisRequest analysisRequest){
+        analysisMapper.insertAnalysis(analysisRequest);
+    }
 }

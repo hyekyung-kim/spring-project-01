@@ -13,5 +13,4 @@
 
     <mvc:annotation-driven/>   <!-- HttpMessageConverter beans 생성 포함 -->
 
-
 </beans>
