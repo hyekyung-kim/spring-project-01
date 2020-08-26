@@ -16,30 +16,38 @@
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script>
-function postJson(){
+<%--    JSON    --%>
+    function postJson(){
 
-    let reqName = $('#reqName').val();
-    let reqDate = new Date();
-    let jsonData = {
-        reqName : reqName,
-        reqDate : reqDate
+        let reqName = $('#reqName').val();
+        let reqDate = new Date();
+        let jsonData = {
+            reqName : reqName,
+            reqDate : reqDate
+        };
+
+        if(reqName.trim() == ""){
+            alert("요청자 이름을 입력하세요!");
+            return false;
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/request-analysis',
+            processData: false,
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(jsonData),
+            success: function(responseJson){
+                $("#requestResult").html(JSON.stringify(responseJson));
+            },
+            error:function(request,status,error){
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            }
+        });
     };
 
-    $.ajax({
-        type: 'POST',
-        url: '/request-analysis',
-        processData: false,
-        contentType: 'application/json',
-        dataType: 'json',
-        data: JSON.stringify(jsonData),
-        success: function(responseJson){
-            $("#requestResult").html(JSON.stringify(responseJson));
-        },
-        error:function(request,status,error){
-            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-        }
-    });
-};
+
 
 </script>
 <body>

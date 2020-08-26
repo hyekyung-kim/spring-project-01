@@ -48,8 +48,10 @@
     td {
        width: 120px;
     }
-
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script>
+</script>
 <body>
 <div id="wrapper">
     <header><h2>SCAP</h2></header>
@@ -63,21 +65,28 @@
     <section>
         <h3>분석 요청 목록</h3>
 
-        <table>
-            <tr>
-                <td>분석 요청 id</td>
-                <td>요청자</td>
-                <td>분석 요청일</td>
-                <td>승인</td>
-            </tr>
-            <c:forEach var="analysis" items="${analysisList}" varStatus="status">
-            <tr>
-                <td>${analysis.id}</td>
-                <td>${analysis.reqName}</td>
-                <td><fmt:formatDate value="${analysis.reqDate}" pattern="yyyy-MM-dd" /></td>
-                <td><input type="button" value="승인" onClick=""></td>
-            </tr>
-            </c:forEach>
+        <table id="analysisTable">
+            <form action="" id="setRows">
+            </form>
+
+            <thead>
+                <tr>
+                    <td>분석 요청 id</td>
+                    <td>요청자</td>
+                    <td>분석 요청일</td>
+                    <td>승인</td>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="analysis" items="${analysisList}" varStatus="status">
+                    <tr>
+                        <td>${analysis.id}</td>
+                        <td>${analysis.reqName}</td>
+                        <td><fmt:formatDate value="${analysis.reqDate}" pattern="yyyy-MM-dd" /></td>
+                        <td><input type="button" value="승인" onClick=""></td>
+                    </tr>
+                </c:forEach>
+            </tbody>
         </table>
     </section>
 </div>
