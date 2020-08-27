@@ -22,6 +22,10 @@
         padding: 10px;
         height: 50px;
     }
+    p {
+        text-align: right;
+    }
+
     nav {
         border: 1px solid #999;
         padding: 5px;
@@ -38,7 +42,14 @@
 </style>
 <body>
     <div id="wrapper">
-        <header><h2>SCAP</h2></header>
+        <header>
+            <h2>SCAP</h2>
+            <p>
+                [ ${loginMember} ]님 &nbsp;
+                <input type="button" value="sign-out"
+                       onclick=" location.href='/signout/process' "/>
+            </p>
+        </header>
 
         <nav>
               <a href="/index">대시보드</a> <br/>

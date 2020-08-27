@@ -36,13 +36,13 @@
         <form:form modelAttribute="loginForm" method="POST" action="/signin">
             <form:errors cssClass="error" /> <br />
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">ID</label> &nbsp;
                 <form:input path="name" type="text" />
                 <form:errors path="name" cssClass="error" />
             </div>
 
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">PW</label> &nbsp;
                 <form:input path="password" type="password" />
                 <form:errors path="password" cssClass="error" />
             </div>

@@ -47,8 +47,6 @@
         });
     };
 
-
-
 </script>
 <body>
     <h2>분석 요청 페이지</h2>
@@ -59,9 +57,14 @@
         <input type="button" id="reqButton" value="요청" onclick="postJson()">
     </div>
 
-    <br/><br/>
+    <br/>
+    <input type="button" value="로그인 페이지"
+           onclick=" location.href='/login' "/>
 
-    <a>요청 결과</a>
+    <br/><br/>
+    <p>요청 결과</p>
     <div id="requestResult"></div>
+
+
 </body>
 </html>

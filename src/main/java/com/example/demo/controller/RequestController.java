@@ -19,10 +19,19 @@ public class RequestController {
     @Value("request-page")
     private String requestPageName;
 
+    @Value("index")
+    private String indexViewName;
+
     @Autowired
     private AnalysisService analysisService;
 
-    // index.jsp -> manage-request.jsp
+    // 분석 요청: login.jsp -> request-page.jsp
+    @RequestMapping(value="/request/page", method = RequestMethod.GET)
+    public String requestPage(){
+        return requestPageName;
+    }
+
+    // 분석 요청 관리: index.jsp -> manage-request.jsp
     @RequestMapping(value="/manage-request")
     public ModelAndView manageRequest(){
         ModelAndView mav = new ModelAndView();
@@ -39,10 +48,9 @@ public class RequestController {
         return mav;
     }
 
-    // login.jsp -> request-page.jsp
-    @RequestMapping(value="/request/page", method = RequestMethod.GET)
-    public String requestPage(){
-        return requestPageName;
+    // 대시보드: manage-request.jsp -> index.jsp
+    @RequestMapping(value="/index", method = RequestMethod.GET)
+    public String indexPage(){
+        return indexViewName;
     }
-
 }

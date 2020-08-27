@@ -1,6 +1,8 @@
 package com.example.demo.config;
 
-import com.example.demo.service.impl.CustomUserDetailsService;
+import com.example.demo.handler.OnLoginSuccessHandler;
+import com.example.demo.handler.OnLogoutSuccessHandler;
+import com.example.demo.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,8 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    CustomUserDetailsService customUserDetailsService;
-
+    UserDetailsServiceImpl userDetailsServiceImpl;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -26,32 +27,24 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
                 .antMatchers("/request-analysis").permitAll()
                 .antMatchers("/index").hasRole("ADMIN")
                 .antMatchers("/manage-request").hasRole("ADMIN")
-                .and().logout().permitAll()
-                .and().formLogin()
+             .and().logout().permitAll()
+             .and().formLogin()
                 .usernameParameter("name")
                 .passwordParameter("password")
                 .loginPage("/login")                    // 첫 로그인 페이지
-                .loginProcessingUrl("/signin")  // 로그인 버튼 클릭시
-                .defaultSuccessUrl("/signin/process")
-                .and().csrf().disable();
+                .loginProcessingUrl("/signin")          // 로그인 버튼 클릭시
+                .successHandler(new OnLoginSuccessHandler())
+             .and().logout()
+                .logoutUrl("/signout/process")          // 로그아웃 요청 url
+//                .logoutSuccessUrl("/login")             // 로그인 성공
+                .logoutSuccessHandler(new OnLogoutSuccessHandler())
+             .and().csrf().disable();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-        String password = passwordEncoder().encode("admin");
-//        auth.inMemoryAuthentication().withUser("admin").password(password).roles("ADMIN");
-        auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsServiceImpl).passwordEncoder(passwordEncoder());
     }
-
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN");
-//
-//        auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
-//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//        auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder);
-//    }
 
     @Bean
     public PasswordEncoder passwordEncoder(){

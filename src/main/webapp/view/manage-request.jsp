@@ -52,13 +52,16 @@
         display:inline-block;
         cursor:pointer;
     }
+    p {
+        text-align: right;
+    }
 
     ul {
         text-align: center;
         margin-left: auto;
         margin-right: auto;
     }
-    a.active-color { color:#777; }
+
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script>
@@ -123,7 +126,14 @@
 </script>
 <body>
 <div id="wrapper">
-    <header><h2>SCAP</h2></header>
+    <header>
+        <h2>SCAP</h2>
+        <p>
+            [ ${loginMember} ]님 &nbsp;
+            <input type="button" value="sign-out"
+                onclick=" location.href='/signout/process' "/>
+        </p>
+    </header>
 
     <nav>
         <a href="/index">대시보드</a><br/>

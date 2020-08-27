@@ -40,9 +40,8 @@ public class LoginController {
     }
 
     @RequestMapping(value="/signin/process")
-    public ModelAndView handleRequest(HttpServletRequest request, HttpSession session,
-                                      @ModelAttribute("loginForm") LoginForm loginForm, Model model) throws Exception {
-        System.out.println("로그인 시도!");
+    public String handleRequest() throws Exception {
+
 //        new LoginFormValidator().validate(loginForm, bindingResult);
 
         // 검증 오류 발생 시 다시 form view로 이동
@@ -50,16 +49,7 @@ public class LoginController {
 //            return new ModelAndView(formViewName);
 //        }
 //
-        Member member = memberService.getMember(loginForm.getName(), loginForm.getPassword());
-
-        System.out.println("LoginForm : " + loginForm);
-        ModelAndView mav = new ModelAndView();
-
-        MemberSession memberSession = new MemberSession(member);
-        session.setAttribute("memberSession", memberSession);
-        System.out.println("로그인 성공!");
-        mav.setViewName(indexViewName);
-        return mav;
+        return indexViewName;
 
     }
 }
