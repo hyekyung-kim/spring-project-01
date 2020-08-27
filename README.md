@@ -6,3 +6,4 @@ Spring boot / maven <br>
 
 로그인: Spring Security <br>
 로그인 후 권한에 따라 테이블 조회 <br>
+ROLE_ADMIN 사용자의 비밀번호는 BCrypt로 저장
