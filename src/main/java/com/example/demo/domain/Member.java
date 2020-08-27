@@ -44,10 +44,6 @@ public class Member {
         return role;
     }
 
-    public boolean matchPassword(String inputPassword) {
-        return this.password.equals(inputPassword);
-    }
-
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
     }

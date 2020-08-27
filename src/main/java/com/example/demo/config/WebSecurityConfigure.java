@@ -36,7 +36,6 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
                 .successHandler(new OnLoginSuccessHandler())
              .and().logout()
                 .logoutUrl("/signout/process")          // 로그아웃 요청 url
-//                .logoutSuccessUrl("/login")             // 로그인 성공
                 .logoutSuccessHandler(new OnLogoutSuccessHandler())
              .and().csrf().disable();
     }
