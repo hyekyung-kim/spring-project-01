@@ -13,158 +13,291 @@
 <html>
 <head>
     <title>Dashboard</title>
+    <%@ include file="../view/include-top.jsp" %>
 </head>
 <style type="text/css">
-    header {
-        border: 1px solid #999;
-        padding: 10px;
-        height: 50px;
-    }
-    nav {
-        border: 1px solid #999;
-        padding: 5px;
-        float: left;
-        width: 150px;
-        height: 80%;
-        text-align: center;
-    }
-    div {
-        margin: 5px;
-        padding: 10px;
-
-    }
-    table, tr, td {
-        border: 1px solid black;
-        text-align: center;
-    }
-
-    table {
-        border-collapse: collapse;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    td {
-       width: 120px;
-    }
-
-    .pagination a {
-        display:inline-block;
-        cursor:pointer;
-    }
-    p {
-        text-align: right;
-    }
-
-    ul {
-        text-align: center;
-        margin-left: auto;
-        margin-right: auto;
-    }
 
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script>
-    function pagination(){
-        let req_num_row=10;      // 한 화면당 데이터 수
-        let $tr=jQuery('tbody tr');
-        let total_num_row=$tr.length;
-        let num_pages=0;
-        if(total_num_row % req_num_row ==0){
-            num_pages=total_num_row / req_num_row;
-        }
-        if(total_num_row % req_num_row >=1){
-            num_pages=total_num_row / req_num_row;
-            num_pages++;
-            num_pages=Math.floor(num_pages++);
-        }
-
-        // 페이징 바
-        for(let i=1; i<=num_pages; i++){
-            jQuery('.pagination').append("<a>"+i+"</a>&nbsp;&nbsp;");
-            jQuery('.pagination:nth-child(2)').addClass("active");
-            jQuery('.pagination a').addClass("pagination-link");
-        }
-
-        // 해당 페이지만 보여주기
-        $tr.each(function(i){
-            jQuery(this).hide();
-            if(i+1 <= req_num_row){
-                $tr.eq(i).show();
-            }
-        });
-
-        jQuery('.pagination a').click('.pagination-link', function(e){
-            e.preventDefault();
-            $tr.hide();
-            let page=jQuery(this).text();
-            let temp=page-1;
-            let start=temp*req_num_row;
-            let current_link = temp;
-
-            jQuery('.pagination a').removeClass("active");
-            jQuery(this).parent().addClass("active");
-
-            for(let i=0; i< req_num_row; i++){
-                $tr.eq(start+i).show();
-            }
-
-            if(temp >= 1){
-                jQuery('.pagination a:first-child').removeClass("disabled");
-            }
-            else {
-                jQuery('.pagination a:first-child').addClass("disabled");
-            }
-        });
-    }
-
-    jQuery('document').ready(function(){
-        pagination();
-        jQuery('.pagination a:first-child').addClass("disabled");
-    });
+    // function pagination(){
+    //     let req_num_row=10;      // 한 화면당 데이터 수
+    //     let $tr=jQuery('tbody tr');
+    //     let total_num_row=$tr.length;
+    //     let num_pages=0;
+    //     if(total_num_row % req_num_row ==0){
+    //         num_pages=total_num_row / req_num_row;
+    //     }
+    //     if(total_num_row % req_num_row >=1){
+    //         num_pages=total_num_row / req_num_row;
+    //         num_pages++;
+    //         num_pages=Math.floor(num_pages++);
+    //     }
+    //
+    //     // 페이징 바
+    //     for(let i=1; i<=num_pages; i++){
+    //         jQuery('.pagination').append("<a>"+i+"</a>&nbsp;&nbsp;");
+    //         jQuery('.pagination:nth-child(2)').addClass("active");
+    //         jQuery('.pagination a').addClass("pagination-link");
+    //     }
+    //
+    //     // 해당 페이지만 보여주기
+    //     $tr.each(function(i){
+    //         jQuery(this).hide();
+    //         if(i+1 <= req_num_row){
+    //             $tr.eq(i).show();
+    //         }
+    //     });
+    //
+    //     jQuery('.pagination a').click('.pagination-link', function(e){
+    //         e.preventDefault();
+    //         $tr.hide();
+    //         let page=jQuery(this).text();
+    //         let temp=page-1;
+    //         let start=temp*req_num_row;
+    //         let current_link = temp;
+    //
+    //         jQuery('.pagination a').removeClass("active");
+    //         jQuery(this).parent().addClass("active");
+    //
+    //         for(let i=0; i< req_num_row; i++){
+    //             $tr.eq(start+i).show();
+    //         }
+    //
+    //         if(temp >= 1){
+    //             jQuery('.pagination a:first-child').removeClass("disabled");
+    //         }
+    //         else {
+    //             jQuery('.pagination a:first-child').addClass("disabled");
+    //         }
+    //     });
+    // }
+    //
+    // jQuery('document').ready(function(){
+    //     pagination();
+    //     jQuery('.pagination a:first-child').addClass("disabled");
+    // });
 
 </script>
-<body>
-<div id="wrapper">
-    <header>
-        <h2>SCAP</h2>
-        <p>
+<body id="page-top">
+
+<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+    <a class="navbar-brand mr-1" href="">SCAP</a>
+
+    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Navbar Search -->
+    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Navbar -->
+    <ul class="navbar-nav ml-auto ml-md-0">
+        <li class="nav-item dropdown no-arrow mx-1">
+            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i>
+                <span class="badge badge-danger">9+</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+        </li>
+        <li class="nav-item dropdown no-arrow mx-1">
+            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-envelope fa-fw"></i>
+                <span class="badge badge-danger">7</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+        </li>
+        <li class="nav-item dropdown no-arrow">
             [ ${loginMember} ]님 &nbsp;
-            <input type="button" value="sign-out"
-                onclick=" location.href='/signout/process' "/>
-        </p>
-    </header>
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user-circle fa-fw"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">Settings</a>
+                <a class="dropdown-item" href="#">Activity Log</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" onclick=" location.href='/signout/process' "
+                   data-toggle="modal" data-target="#logoutModal">Logout</a>
+            </div>
+        </li>
+    </ul>
+</nav>
 
-    <nav>
-        <a href="/index">대시보드</a><br/>
-        <a href="/manage-request">분석 요청 관리</a>
-    </nav>
 
-    <h3>분석 요청 목록</h3>
 
-    <table>
-        <thead>
-            <tr>
-                <td>분석 요청 id</td>
-                <td>요청자</td>
-                <td>분석 요청일</td>
-                <td>승인</td>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach var="analysis" items="${analysisList}" varStatus="status">
-                <tr>
-                    <td>${analysis.id}</td>
-                    <td>${analysis.reqName}</td>
-                    <td><fmt:formatDate value="${analysis.reqDate}" pattern="yyyy-MM-dd" /></td>
-                    <td><input type="button" value="승인" onClick=""></td>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
+<div id="wrapper">
+    <!-- Sidebar -->
+    <ul class="sidebar navbar-nav">
+        <li class="nav-item active">
+            <a class="nav-link" href="/index">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
 
-    <ul class="pagination"></ul>
+        <li class="nav-item">
+            <a class="nav-link" href="/manage-request">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>분석 요청 관리</span></a>
+        </li>
+    </ul>
 
+
+
+    <div id="content-wrapper">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">Tables</li>
+            </ol>
+            <!-- DataTables Example -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    분석 요청 목록
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>분석 요청 id</th>
+                                <th>요청자</th>
+                                <th>분석 요청일</th>
+                                <th>승인</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>분석 요청 id</th>
+                                <th>요청자</th>
+                                <th>분석 요청일</th>
+                                <th>승인</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            <c:forEach var="analysis" items="${analysisList}" varStatus="status">
+                                <tr>
+                                    <td>${analysis.id}</td>
+                                    <td>${analysis.reqName}</td>
+                                    <td><fmt:formatDate value="${analysis.reqDate}" pattern="yyyy-MM-dd" /></td>
+                                    <td><input type="button" value="승인" onClick=""></td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /.content-wrapper -->
 </div>
+<!-- /#wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<%--<div id="wrapper">--%>
+<%--    <header>--%>
+<%--        <h2>SCAP</h2>--%>
+<%--        <p>--%>
+<%--            [ ${loginMember} ]님 &nbsp;--%>
+<%--            <input type="button" value="sign-out"--%>
+<%--                onclick=" location.href='/signout/process' "/>--%>
+<%--        </p>--%>
+<%--    </header>--%>
+
+<%--    <nav>--%>
+<%--        <a href="/index">대시보드</a><br/>--%>
+<%--        <a href="/manage-request">분석 요청 관리</a>--%>
+<%--    </nav>--%>
+
+<%--    <h3>분석 요청 목록</h3>--%>
+
+<%--    <table>--%>
+<%--        <thead>--%>
+<%--            <tr>--%>
+<%--                <td>분석 요청 id</td>--%>
+<%--                <td>요청자</td>--%>
+<%--                <td>분석 요청일</td>--%>
+<%--                <td>승인</td>--%>
+<%--            </tr>--%>
+<%--        </thead>--%>
+<%--        <tbody>--%>
+<%--            <c:forEach var="analysis" items="${analysisList}" varStatus="status">--%>
+<%--                <tr>--%>
+<%--                    <td>${analysis.id}</td>--%>
+<%--                    <td>${analysis.reqName}</td>--%>
+<%--                    <td><fmt:formatDate value="${analysis.reqDate}" pattern="yyyy-MM-dd" /></td>--%>
+<%--                    <td><input type="button" value="승인" onClick=""></td>--%>
+<%--                </tr>--%>
+<%--            </c:forEach>--%>
+<%--        </tbody>--%>
+<%--    </table>--%>
+
+<%--    <ul class="pagination"></ul>--%>
+
+<%--</div>--%>
+
+<%@ include file="../view/include-bottom.jsp" %>
 </body>
 </html>

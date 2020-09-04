@@ -13,7 +13,8 @@
 
 <html>
 <head>
-    <title>Login Page</title>
+    <title>SB Admin - Login</title>
+    <%@ include file="../view/include-top.jsp" %>
 </head>
 
 <style>
@@ -27,41 +28,72 @@
         location.href="/request/page";
     }
 </script>
-<body>
-    <div class="container" style="padding: 100px">
-        <h2>Login</h2>
-        <br/>
+<body class="bg-dark">
+
+<div class="container">
+    <div class="card card-login mx-auto mt-5">
+        <div class="card-header">Login</div>
+        <div class="card-body">
         
-        <%--@elvariable id="loginForm" type="java"--%>
-        <form:form modelAttribute="loginForm" method="POST" action="/signin">
-            <form:errors cssClass="error" /> <br />
-            <div class="form-group">
-                <label for="name">ID</label> &nbsp;
-                <form:input path="name" type="text" />
-                <form:errors path="name" cssClass="error" />
-            </div>
+            <%--@elvariable id="loginForm" type="java"--%>
+            <form:form modelAttribute="loginForm" method="POST" action="/signin">
 
-            <div class="form-group">
-                <label for="password">PW</label> &nbsp;
-                <form:input path="password" type="password" />
-                <form:errors path="password" cssClass="error" />
-            </div>
-            <br />
-            <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
-                <p>로그인 실패: <br/>
-                        ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p>
-                <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
-            </c:if>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <label for="name">ID</label> &nbsp;
+                        <form:input path="name" type="text"
+                                    class="form-control" placeholder="Email address" required="required" autofocus="autofocus" />
+                        <form:errors path="name" cssClass="error" />
+                    </div>
+                </div>
 
-            <div class="form-group" align="center">
-                <input type="submit" value="로그인">
-            </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <label for="password">PW</label> &nbsp;
+                        <form:input path="password" type="password"
+                                    class="form-control" placeholder="Password" required="required"/>
+                        <form:errors path="password" cssClass="error" />
 
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-        </form:form>
+                    </div>
+                </div>
 
-        <input type="button" value="분석 요청" onClick="requestSubmit()">
+                <br />
+                <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+                    <p>로그인 실패: <br/>
+                            ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p>
+                    <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
+                </c:if>
 
+
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="remember-me">
+                            Remember Password
+                        </label>
+                    </div>
+                </div>
+
+
+                <div class="form-group" align="center">
+                    <input type="submit" value="로그인" class="btn btn-primary btn-block">
+                </div>
+
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            </form:form>
+
+            <input type="button" value="분석 요청" onClick="requestSubmit()" class="btn btn-primary btn-block">
+
+        </div>
+
+        <div class="text-center">
+            <a class="d-block small mt-3" href="register.html">Register an Account</a>
+            <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+        </div>
     </div>
+</div>
+
+<%@ include file="../view/include-bottom.jsp" %>
+
 </body>
 </html>
