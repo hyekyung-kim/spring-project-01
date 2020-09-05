@@ -40,20 +40,19 @@
 
                 <div class="form-group">
                     <div class="form-label-group">
-                        <label for="name">ID</label> &nbsp;
                         <form:input path="name" type="text"
                                     class="form-control" placeholder="Email address" required="required" autofocus="autofocus" />
                         <form:errors path="name" cssClass="error" />
+                        <label for="name">ID</label> &nbsp;
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="form-label-group">
-                        <label for="password">PW</label> &nbsp;
                         <form:input path="password" type="password"
                                     class="form-control" placeholder="Password" required="required"/>
                         <form:errors path="password" cssClass="error" />
-
+                        <label for="password">PW</label> &nbsp;
                     </div>
                 </div>
 

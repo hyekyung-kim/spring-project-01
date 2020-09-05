@@ -162,8 +162,6 @@
         </li>
     </ul>
 
-
-
     <div id="content-wrapper">
         <div class="container-fluid">
             <!-- Breadcrumbs-->
@@ -214,7 +212,6 @@
             </div>
         </div>
         <!-- /.container-fluid -->
-
     </div>
     <!-- /.content-wrapper -->
 </div>
@@ -246,58 +243,17 @@
     </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-<%--<div id="wrapper">--%>
-<%--    <header>--%>
-<%--        <h2>SCAP</h2>--%>
-<%--        <p>--%>
-<%--            [ ${loginMember} ]님 &nbsp;--%>
-<%--            <input type="button" value="sign-out"--%>
-<%--                onclick=" location.href='/signout/process' "/>--%>
-<%--        </p>--%>
-<%--    </header>--%>
-
-<%--    <nav>--%>
-<%--        <a href="/index">대시보드</a><br/>--%>
-<%--        <a href="/manage-request">분석 요청 관리</a>--%>
-<%--    </nav>--%>
-
-<%--    <h3>분석 요청 목록</h3>--%>
-
-<%--    <table>--%>
-<%--        <thead>--%>
-<%--            <tr>--%>
-<%--                <td>분석 요청 id</td>--%>
-<%--                <td>요청자</td>--%>
-<%--                <td>분석 요청일</td>--%>
-<%--                <td>승인</td>--%>
-<%--            </tr>--%>
-<%--        </thead>--%>
-<%--        <tbody>--%>
-<%--            <c:forEach var="analysis" items="${analysisList}" varStatus="status">--%>
-<%--                <tr>--%>
-<%--                    <td>${analysis.id}</td>--%>
-<%--                    <td>${analysis.reqName}</td>--%>
-<%--                    <td><fmt:formatDate value="${analysis.reqDate}" pattern="yyyy-MM-dd" /></td>--%>
-<%--                    <td><input type="button" value="승인" onClick=""></td>--%>
-<%--                </tr>--%>
-<%--            </c:forEach>--%>
-<%--        </tbody>--%>
-<%--    </table>--%>
-
-<%--    <ul class="pagination"></ul>--%>
-
-<%--</div>--%>
-
 <%@ include file="../view/include-bottom.jsp" %>
+<!-- Page level plugin JavaScript-->
+<script src="../resources/vendor/datatables/jquery.dataTables.js"></script>
+<script src="../resources/vendor/datatables/dataTables.bootstrap4.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="../resources/js/sb-admin.min.js"></script>
+
+<!-- Demo scripts for this page-->
+<script src="../resources/js/demo/datatables-demo.js"></script>
+
+
 </body>
 </html>
