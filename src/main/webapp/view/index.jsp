@@ -118,23 +118,6 @@
     </div>
 </div>
 
-<%--        <header>--%>
-<%--            <h2>SCAP</h2>--%>
-<%--            <p>--%>
-<%--                [ ${loginMember} ]님 &nbsp;--%>
-<%--                <input type="button" value="sign-out"--%>
-<%--                       onclick=" location.href='/signout/process' "/>--%>
-<%--            </p>--%>
-<%--        </header>--%>
-
-<%--        <nav>--%>
-<%--              <a href="/index">대시보드</a> <br/>--%>
-<%--              <a href="/manage-request">분석 요청 관리</a>--%>
-<%--        </nav>--%>
-
-<%--        <section>--%>
-<%--            <h3>Dashboard</h3>--%>
-<%--        </section>--%>
 <%@ include file="../view/include-bottom.jsp" %>
 </body>
 </html>
