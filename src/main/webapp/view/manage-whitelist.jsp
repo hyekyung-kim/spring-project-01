@@ -36,26 +36,26 @@
                 </li>
 
                 <li class="breadcrumb-item active">Tables</li>
-
-                <li>
-                    <div class="input-group" text-align="center">
-                        &nbsp;&nbsp;&nbsp; ID 입력 &nbsp;
-                        <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <input type="button" value="등록" class="btn btn-primary btn-block"
-                                   onClick="add()"/>
-                        </div>
-                    </div>
-                </li>
             </ol>
+
             <!-- DataTables Example -->
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fas fa-table"></i>
                     화이트리스트
                 </div>
+
                 <div class="card-body">
                     <div class="table-responsive">
+                        <div class="input-group" text-align="center">
+                            &nbsp;&nbsp;&nbsp; ID 입력 &nbsp;
+                            <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <input type="button" value="등록" class="btn btn-primary btn-block"
+                                       onClick="add()"/>
+                            </div>
+                        </div>
+                        <br/>
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
@@ -93,8 +93,6 @@
     <i class="fas fa-angle-up"></i>
 </a>
 
-
-
 <!-- Logout Modal-->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -121,10 +119,7 @@
 
 <!-- Custom scripts for all pages-->
 <script src="../resources/js/sb-admin.min.js"></script>
-
 <!-- Demo scripts for this page-->
 <script src="../resources/js/demo/datatables-demo.js"></script>
-
-
 </body>
 </html>
