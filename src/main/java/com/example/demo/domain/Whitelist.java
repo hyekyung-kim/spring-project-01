@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Whitelist {
     String name;
-    Date reqDate;
+    Date regDate;
 
     public void setName(String name) {
         this.name = name;
@@ -14,12 +14,12 @@ public class Whitelist {
         return name;
     }
 
-    public void setReqDate(Date reqDate) {
-        this.reqDate = reqDate;
+    public void setRegDate(Date regDate) {
+        this.regDate = regDate;
     }
 
-    public Date getReqDate() {
-        return reqDate;
+    public Date getRegDate() {
+        return regDate;
     }
 
 }

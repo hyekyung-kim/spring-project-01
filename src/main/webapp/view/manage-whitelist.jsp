@@ -5,7 +5,7 @@
   Time: 오후 6:39
   To change this template use File | Settings | File Templates.
 --%>
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Dashboard</title>
@@ -16,33 +16,16 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script>
+    function add() {
+
+    }
 </script>
 <body id="page-top">
 
 <%@ include file="../view/navbar.jsp" %>
 
 <div id="wrapper">
-    <!-- Sidebar -->
-    <ul class="sidebar navbar-nav">
-        <li class="nav-item active">
-            <a class="nav-link" href="/index">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="/manage-request">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>분석 요청 관리</span></a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="/manage-whitelist">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>화이트리스트</span></a>
-        </li>
-    </ul>
+    <%@ include file="../view/sidebar.jsp" %>
 
     <div id="content-wrapper">
         <div class="container-fluid">
@@ -51,15 +34,16 @@
                 <li class="breadcrumb-item">
                     <a href="#">Dashboard</a>
                 </li>
+
                 <li class="breadcrumb-item active">Tables</li>
 
                 <li>
-                    <div class="input-group">
+                    <div class="input-group" text-align="center">
+                        &nbsp;&nbsp;&nbsp; ID 입력 &nbsp;
                         <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                         <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
-                                <i class="fas fa-search"></i>
-                            </button>
+                            <input type="button" value="등록" class="btn btn-primary btn-block"
+                                   onClick="add()"/>
                         </div>
                     </div>
                 </li>
@@ -68,34 +52,28 @@
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fas fa-table"></i>
-                    분석 요청 목록
+                    화이트리스트
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>분석 요청 id</th>
-                                <th>요청자</th>
-                                <th>분석 요청일</th>
-                                <th>승인</th>
+                                <th>사용자 id</th>
+                                <th>등록일</th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
-                                <th>분석 요청 id</th>
-                                <th>요청자</th>
-                                <th>분석 요청일</th>
-                                <th>승인</th>
+                                <th>사용자 id</th>
+                                <th>등록일</th>
                             </tr>
                             </tfoot>
                             <tbody>
-                            <c:forEach var="analysis" items="${analysisList}" varStatus="status">
+                            <c:forEach var="whitelist" items="${whitelist}" varStatus="status">
                                 <tr>
-                                    <td>${analysis.id}</td>
-                                    <td>${analysis.reqName}</td>
-                                    <td><fmt:formatDate value="${analysis.reqDate}" pattern="yyyy-MM-dd" /></td>
-                                    <td><input type="button" value="승인" onClick=""></td>
+                                    <td>${whitelist.name}</td>
+                                    <td><fmt:formatDate value="${whitelist.regDate}" pattern="yyyy-MM-dd" /></td>
                                 </tr>
                             </c:forEach>
                             </tbody>

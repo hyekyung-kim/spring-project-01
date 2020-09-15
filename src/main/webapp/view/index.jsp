@@ -18,29 +18,7 @@
 <%@ include file="../view/navbar.jsp" %>
 
 <div id="wrapper">
-        <!-- Sidebar -->
-        <ul class="sidebar navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="/index">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/manage-request">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>분석 요청 관리</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/manage-whitelist">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>화이트리스트</span></a>
-            </li>
-        </ul>
-
-
+    <%@ include file="../view/sidebar.jsp" %>
 
     <div id="content-wrapper">
         <div class="container-fluid">

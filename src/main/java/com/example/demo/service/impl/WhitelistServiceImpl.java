@@ -4,9 +4,11 @@ import com.example.demo.dao.WhitelistDao;
 import com.example.demo.domain.Whitelist;
 import com.example.demo.service.WhitelistService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class WhitelistServiceImpl implements WhitelistService {
 
     @Autowired

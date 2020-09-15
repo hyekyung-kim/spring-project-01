@@ -6,14 +6,14 @@
 <mapper namespace="com.example.demo.dao.mybatis.mapper.WhitelistMapper">
 
   <select id="getWhitelist" resultType="com.example.demo.domain.Whitelist">
-    SELECT name as name, req_date as reqDate
+    SELECT name, reg_date as regDate
     FROM whitelist
-    ORDER BY req_date ASC;
+    ORDER BY reg_date ASC;
   </select>
 
   <insert id="insertWhitelist" parameterType="com.example.demo.domain.Whitelist">
-    INSERT INTO whitelist (name, req_date)
-    select #{name}, #{reqDate}
+    INSERT INTO whitelist (name, reg_date)
+    select #{name}, #{reg_date}
     from whitelist;
 
 <!--    <selectKey keyProperty="id" resultType="int" order="AFTER">-->
