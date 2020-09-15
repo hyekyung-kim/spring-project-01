@@ -13,14 +13,19 @@ import java.util.List;
 
 @Controller
 public class RequestController {
+    @Value("index")
+    private String indexViewName;
+
     @Value("manage-request")
     private String manageRequestViewName;
+
+    @Value("manage-whitelist")
+    private String manageWhitelistViewName;
 
     @Value("request-page")
     private String requestPageName;
 
-    @Value("index")
-    private String indexViewName;
+
 
     @Autowired
     private AnalysisService analysisService;
@@ -45,6 +50,15 @@ public class RequestController {
 
         mav.addObject("analysisList", analysisList);
         mav.setViewName(manageRequestViewName);
+        return mav;
+    }
+
+    // 화이트리스트 페이지: 어떤 페이지지 -> mnage-request.jsp
+    @RequestMapping(value="/manage-whitelist")
+    public ModelAndView whitelistRequest(){
+        ModelAndView mav = new ModelAndView();
+
+        mav.setViewName(manageWhitelistViewName);
         return mav;
     }
 

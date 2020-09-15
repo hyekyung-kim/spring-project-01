@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: 김혜경
-  Date: 2020-08-25
-  Time: 오후 10:13
+  Date: 2020-09-15
+  Time: 오후 6:39
   To change this template use File | Settings | File Templates.
 --%>
 
@@ -52,6 +52,17 @@
                     <a href="#">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item active">Tables</li>
+
+                <li>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </li>
             </ol>
             <!-- DataTables Example -->
             <div class="card mb-3">
@@ -103,6 +114,7 @@
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
+
 
 
 <!-- Logout Modal-->
