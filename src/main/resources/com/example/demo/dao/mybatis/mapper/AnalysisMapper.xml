@@ -12,9 +12,9 @@
   </select>
 
   <insert id="insertAnalysis" parameterType="com.example.demo.domain.AnalysisRequest">
-    INSERT INTO analysis_request (id, req_name, req_date)
+    INSERT INTO analysis_request (id, req_name, req_date, status)
     select case count(*) when 0 then 1 else max(id) + 1 end,
-            #{reqName}, #{reqDate}
+            #{reqName}, #{reqDate}, #{status}
     from analysis_request;
 
     <selectKey keyProperty="id" resultType="int" order="AFTER">

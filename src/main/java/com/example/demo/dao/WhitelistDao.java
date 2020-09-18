@@ -8,4 +8,6 @@ public interface WhitelistDao {
     List<Whitelist> getWhitelist();
 
     void insertWhitelist(Whitelist whitelist);
+
+    int isInWhitelist(String name);
 }

@@ -6,6 +6,7 @@ public class AnalysisRequest {
     int id;
     String reqName;
     Date reqDate;
+    String status;
 
     public void setId(int id) {
         this.id = id;
@@ -29,5 +30,13 @@ public class AnalysisRequest {
 
     public Date getReqDate() {
         return reqDate;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

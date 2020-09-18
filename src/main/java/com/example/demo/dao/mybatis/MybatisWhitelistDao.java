@@ -21,4 +21,8 @@ public class MybatisWhitelistDao implements WhitelistDao {
     public void insertWhitelist(Whitelist whitelist){
         whitelistMapper.insertWhitelist(whitelist);
     };
+
+    public int isInWhitelist(String name){
+        return whitelistMapper.isInWhitelist(name);
+    }
 }

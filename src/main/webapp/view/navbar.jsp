@@ -53,7 +53,7 @@
             </div>
         </li>
         <li class="nav-item dropdown no-arrow">
-            [ ${loginMember} ]님 &nbsp;
+            <a style="color:white" >[ ${loginMember} ]님 &nbsp;</a>
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-user-circle fa-fw"></i>
             </a>

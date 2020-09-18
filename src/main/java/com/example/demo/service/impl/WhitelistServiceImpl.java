@@ -21,4 +21,8 @@ public class WhitelistServiceImpl implements WhitelistService {
     public void insertWhitelist(Whitelist whitelist){
         whitelistDao.insertWhitelist(whitelist);
     }
+
+    public int isInWhitelist(String name){
+        return whitelistDao.isInWhitelist(name);
+    }
 }

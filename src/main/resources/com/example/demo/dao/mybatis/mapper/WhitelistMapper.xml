@@ -13,8 +13,8 @@
 
   <insert id="insertWhitelist" parameterType="com.example.demo.domain.Whitelist">
     INSERT INTO whitelist (name, reg_date)
-    select #{name}, #{reg_date}
-    from whitelist;
+    SELECT #{name}, #{reg_date}
+    FROM whitelist;
 
 <!--    <selectKey keyProperty="id" resultType="int" order="AFTER">-->
 <!--      SELECT max(id) as id from analysis_request;-->
@@ -22,5 +22,8 @@
 
   </insert>
 
+  <select id="isInWhitelist" parameterType="String" resultType="int">
+    SELECT exists (SELECT * FROM whitelist WHERE name=#{name});
+  </select>
 
 </mapper>

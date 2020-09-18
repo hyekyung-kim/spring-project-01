@@ -8,4 +8,6 @@ public interface WhitelistService {
     List<Whitelist> getWhitelist();
 
     void insertWhitelist(Whitelist whitelist);
+
+    int isInWhitelist(String name);
 }

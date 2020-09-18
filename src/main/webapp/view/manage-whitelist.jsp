@@ -49,7 +49,7 @@
                     <div class="table-responsive">
                         <div class="input-group" text-align="center">
                             &nbsp;&nbsp;&nbsp; ID 입력 &nbsp;
-                            <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control" placeholder="" aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <input type="button" value="등록" class="btn btn-primary btn-block"
                                        onClick="add()"/>
