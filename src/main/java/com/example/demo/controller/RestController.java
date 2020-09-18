@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.AnalysisRequest;
+import com.example.demo.domain.Whitelist;
 import com.example.demo.service.AnalysisService;
 import com.example.demo.service.WhitelistService;
 import javafx.beans.NamedArg;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.List;
 
 @org.springframework.web.bind.annotation.RestController
 public class RestController {
@@ -25,25 +27,25 @@ public class RestController {
     private String setupMode;
 
     @ResponseBody
-    @RequestMapping(value="/request-analysis", method= RequestMethod.POST)
+    @RequestMapping(value = "/request-analysis", method = RequestMethod.POST)
     public AnalysisRequest getAnalysisInfo(@RequestBody AnalysisRequest analysisRequest,
                                            HttpServletResponse response, Model model) throws IOException, ParseException {
         System.out.println("분석 요청:");
         System.out.println("setup.mode:" + setupMode);
 
-        if(setupMode.equals("1")){
+        if (setupMode.equals("1")) {
             analysisRequest.setStatus("run");
-        }else if(setupMode.equals("2")){
+        } else if (setupMode.equals("2")) {
             analysisRequest.setStatus("wait");
-        }else if(setupMode.equals("3")){
+        } else if (setupMode.equals("3")) {
             String name = analysisRequest.getReqName();
 
-            if(whitelistService.isInWhitelist(name) == 1){ // 화이트리스트에 등록된 경우
+            if (whitelistService.isInWhitelist(name) == 1) { // 화이트리스트에 등록된 경우
                 analysisRequest.setStatus("run");
-            }else{                     // 화이트리스트에 없는 경우
+            } else {                     // 화이트리스트에 없는 경우
                 analysisRequest.setStatus("wait");
             }
-        }else{
+        } else {
             System.out.println("exception");
             analysisRequest.setStatus("error");
         }
@@ -62,9 +64,9 @@ public class RestController {
     }
 
     @ResponseBody
-    @RequestMapping(value="/request-status/{id}", method= RequestMethod.GET)
+    @RequestMapping(value = "/request-status/{id}", method = RequestMethod.GET)
     public AnalysisRequest requestStatus(@PathVariable("id") final String id,
-                                        HttpServletResponse response, Model model) throws IOException, ParseException {
+                                         HttpServletResponse response, Model model) throws IOException, ParseException {
         System.out.println("status를 run으로 변경");
 
         analysisService.changeStatusToRun(Integer.parseInt(id));
@@ -79,4 +81,21 @@ public class RestController {
 
         return analysisRequest;
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/request-whitelist", method = RequestMethod.POST)
+    public Whitelist addWhitelistUser(@RequestBody Whitelist whiteUser,
+                                      HttpServletResponse response, Model model) throws IOException, ParseException {
+        System.out.println("whitelist");
+
+        whitelistService.insertWhitelist(whiteUser);
+
+        if (whiteUser == null) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return null;
+        }
+
+        return whiteUser;
+    }
+
 }

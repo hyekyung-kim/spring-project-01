@@ -21,17 +21,11 @@ public class RequestController {
     @Value("manage-request")
     private String manageRequestViewName;
 
-    @Value("manage-whitelist")
-    private String manageWhitelistViewName;
-
     @Value("request-page")
     private String requestPageName;
 
     @Autowired
     private AnalysisService analysisService;
-
-    @Autowired
-    private WhitelistService whitelistService;
 
     // 분석 요청: login.jsp -> request-page.jsp
     @RequestMapping(value="/request/page", method = RequestMethod.GET)
@@ -54,24 +48,6 @@ public class RequestController {
 
         mav.addObject("analysisList", analysisList);
         mav.setViewName(manageRequestViewName);
-        return mav;
-    }
-
-    // 화이트리스트 페이지:  -> manage-whitelist.jsp
-    @RequestMapping(value="/manage-whitelist")
-    public ModelAndView whitelistRequest(){
-        ModelAndView mav = new ModelAndView();
-
-        List<Whitelist> whitelist = whitelistService.getWhitelist();
-
-        for(int i = 0; i < whitelist.size(); i++){
-            System.out.println(i + " whitelist: " +
-                    whitelist.get(i).getName() + " " + whitelist.get(i).getRegDate());
-        }
-
-        mav.addObject("whitelist", whitelist);
-
-        mav.setViewName(manageWhitelistViewName);
         return mav;
     }
 

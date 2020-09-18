@@ -16,8 +16,49 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script>
-    function add() {
+    <%--    JSON    --%>
+    function addWhitelistUserJSON(){
 
+        let name = $('#addUser').val();
+        let regDate = new Date();
+
+        let jsonData = {
+            name : name,
+            regDate : regDate
+        };
+
+        if(name.trim() == ""){
+            alert("화이트 리스트에 추가할 사용자 id를 입력하세요!");
+            return false;
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/request-whitelist',
+            processData: false,
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(jsonData),
+            success: function(responseJson){
+                $("#dataTable > tbody:last").append("<tr><td>" + responseJson.name + "</td>" +
+                                                    "<td>" + responseJson.regDate.format("yyyy-MM-dd") + "</td></tr>");
+            },
+            error:function(request,status,error){
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            }
+        });
+    };
+
+    function getFormatDate(date){
+        let year = date.getFullYear();
+
+        let month = (1 + date.getMonth());
+        month = month >= 10 ? month : '0' + month;
+
+        let day = date.getDate();
+        day = day >= 10 ? day : '0' + day;
+
+        return  year + '-' + month + '-' + day;
     }
 </script>
 <body id="page-top">
@@ -48,11 +89,12 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="input-group" text-align="center">
-                            &nbsp;&nbsp;&nbsp; ID 입력 &nbsp;
-                            <input type="text" class="form-control" placeholder="" aria-label="Search" aria-describedby="basic-addon2">
+
+                             ID 입력
+                            <input type="text" id="addUser" class="form-control" placeholder="" aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
-                                <input type="button" value="등록" class="btn btn-primary btn-block"
-                                       onClick="add()"/>
+                                <input type="button" id="addButton" value="등록" class="btn btn-primary btn-block"
+                                       onClick="addWhitelistUserJSON()"/>
                             </div>
                         </div>
                         <br/>
@@ -76,6 +118,7 @@
                                     <td><fmt:formatDate value="${whitelist.regDate}" pattern="yyyy-MM-dd" /></td>
                                 </tr>
                             </c:forEach>
+
                             </tbody>
                         </table>
                     </div>
