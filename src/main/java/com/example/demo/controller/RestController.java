@@ -61,14 +61,14 @@ public class RestController {
         return analysisRequest;
     }
 
-
-    @RequestMapping(value="/request-status/{id}", method= RequestMethod.PUT)
+    @ResponseBody
+    @RequestMapping(value="/request-status/{id}", method= RequestMethod.GET)
     public AnalysisRequest requestStatus(@PathVariable("id") final String id,
-                                        @RequestBody final AnalysisRequest analysisRequest,
                                         HttpServletResponse response, Model model) throws IOException, ParseException {
         System.out.println("status를 run으로 변경");
 
         analysisService.changeStatusToRun(Integer.parseInt(id));
+        AnalysisRequest analysisRequest = analysisService.getAnalysisById(Integer.parseInt(id));
 
         if (analysisRequest == null) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);

@@ -20,9 +20,11 @@
     function statusJSON(id){
         let reqUrl = "/request-status/" + id;
         $.ajax({
-            type: 'PUT',
+            type: 'GET',
             url: reqUrl,
             processData: false,
+            contentType: 'application/json',
+            dataType: 'json',
             success: function(){
                 let btn = document.getElementById(id);
                 btn.value="실행 중";

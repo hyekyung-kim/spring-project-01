@@ -25,4 +25,8 @@ public class MybatisAnalysisDao implements AnalysisDao {
     public void changeStatusToRun(int id){
         analysisMapper.changeStatusToRun(id);
     }
+
+    public AnalysisRequest getAnalysisById(int id){
+        return analysisMapper.getAnalysisById(id);
+    }
 }

@@ -31,4 +31,9 @@ public class AnalysisServiceImpl implements AnalysisService {
     public void changeStatusToRun(int id){
         analysisDao.changeStatusToRun(id);
     }
+
+    @Override
+    public AnalysisRequest getAnalysisById(int id){
+        return analysisDao.getAnalysisById(id);
+    }
 }

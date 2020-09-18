@@ -10,4 +10,6 @@ public interface AnalysisService {
     void insertAnalysis(AnalysisRequest analysisRequest);
 
     void changeStatusToRun(int id);
+
+    AnalysisRequest getAnalysisById(int id);
 }
