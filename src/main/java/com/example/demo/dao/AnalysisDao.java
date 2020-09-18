@@ -8,4 +8,6 @@ public interface AnalysisDao {
     List<AnalysisRequest> getAnalysisList();
 
     void insertAnalysis(AnalysisRequest analysisRequest);
+
+    void changeStatusToRun(int id);
 }

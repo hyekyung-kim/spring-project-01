@@ -8,4 +8,6 @@ public interface AnalysisService {
     List<AnalysisRequest> getAnalysisList();
 
     void insertAnalysis(AnalysisRequest analysisRequest);
+
+    void changeStatusToRun(int id);
 }

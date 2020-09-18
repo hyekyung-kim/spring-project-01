@@ -21,4 +21,8 @@ public class MybatisAnalysisDao implements AnalysisDao {
     public void insertAnalysis(AnalysisRequest analysisRequest){
         analysisMapper.insertAnalysis(analysisRequest);
     }
+
+    public void changeStatusToRun(int id){
+        analysisMapper.changeStatusToRun(id);
+    }
 }

@@ -17,7 +17,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script>
 <%--    JSON    --%>
-    function postJson(){
+    function requestJson(){
 
         let reqName = $('#reqName').val();
         let reqDate = new Date();
@@ -54,7 +54,7 @@
     <div class="form-group">
         <label>요청자 이름</label>
         <input type="text" id="reqName" name="reqName" />
-        <input type="button" id="reqButton" value="요청" onclick="postJson()">
+        <input type="button" id="reqButton" value="요청" onclick="requestJson()">
     </div>
 
     <br/>

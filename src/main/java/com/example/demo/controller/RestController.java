@@ -28,7 +28,7 @@ public class RestController {
     @RequestMapping(value="/request-analysis", method= RequestMethod.POST)
     public AnalysisRequest getAnalysisInfo(@RequestBody AnalysisRequest analysisRequest,
                                            HttpServletResponse response, Model model) throws IOException, ParseException {
-        System.out.println("rest api test:");
+        System.out.println("분석 요청:");
         System.out.println("setup.mode:" + setupMode);
 
         if(setupMode.equals("1")){
@@ -61,4 +61,22 @@ public class RestController {
         return analysisRequest;
     }
 
+
+    @RequestMapping(value="/request-status/{id}", method= RequestMethod.PUT)
+    public AnalysisRequest requestStatus(@PathVariable("id") final String id,
+                                        @RequestBody final AnalysisRequest analysisRequest,
+                                        HttpServletResponse response, Model model) throws IOException, ParseException {
+        System.out.println("status를 run으로 변경");
+
+        analysisService.changeStatusToRun(Integer.parseInt(id));
+
+        if (analysisRequest == null) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return null;
+        }
+
+        model.addAttribute("analysisRequest", analysisRequest);
+
+        return analysisRequest;
+    }
 }

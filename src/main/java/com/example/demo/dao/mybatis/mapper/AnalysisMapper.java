@@ -12,4 +12,6 @@ public interface AnalysisMapper {
     List<AnalysisRequest> getAnalysisList();
 
     void insertAnalysis(AnalysisRequest analysisRequest);
+
+    void changeStatusToRun(int id);
 }

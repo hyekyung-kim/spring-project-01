@@ -16,7 +16,23 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script>
-
+    <%--    JSON    --%>
+    function statusJSON(id){
+        let reqUrl = "/request-status/" + id;
+        $.ajax({
+            type: 'PUT',
+            url: reqUrl,
+            processData: false,
+            success: function(){
+                let btn = document.getElementById(id);
+                btn.value="실행 중";
+                btn.disabled = true;
+            },
+            error:function(request,status,error){
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            }
+        });
+    };
 </script>
 <body id="page-top">
 
@@ -65,7 +81,16 @@
                                     <td>${analysis.id}</td>
                                     <td>${analysis.reqName}</td>
                                     <td><fmt:formatDate value="${analysis.reqDate}" pattern="yyyy-MM-dd" /></td>
-                                    <td><input type="button" value="승인" onClick=""></td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${analysis.status eq 'run'}">
+                                                <input type="button" id="${analysis.id}" value="실행 중" disabled="disabled"/>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <input type="button" id="${analysis.id}" value="승인" onclick="statusJSON('${analysis.id}')"/>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
                                 </tr>
                             </c:forEach>
                             </tbody>

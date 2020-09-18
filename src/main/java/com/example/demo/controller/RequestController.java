@@ -47,8 +47,9 @@ public class RequestController {
         List<AnalysisRequest> analysisList = analysisService.getAnalysisList();
 
         for(int i = 0; i < analysisList.size(); i++){
-            System.out.println(i + " analysisList: " + analysisList.get(i).getId() + " " +
-                    analysisList.get(i).getReqName() + " " + analysisList.get(i).getReqDate());
+            System.out.println(i + " analysisList: " + analysisList.get(i).getId() + " "
+                    + analysisList.get(i).getReqName() + " " + analysisList.get(i).getReqDate()
+                    + " " + analysisList.get(i).getStatus());
         }
 
         mav.addObject("analysisList", analysisList);
@@ -56,7 +57,7 @@ public class RequestController {
         return mav;
     }
 
-    // 화이트리스트 페이지:  -> manage-request.jsp
+    // 화이트리스트 페이지:  -> manage-whitelist.jsp
     @RequestMapping(value="/manage-whitelist")
     public ModelAndView whitelistRequest(){
         ModelAndView mav = new ModelAndView();

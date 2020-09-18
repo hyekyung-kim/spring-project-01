@@ -6,7 +6,7 @@
 <mapper namespace="com.example.demo.dao.mybatis.mapper.AnalysisMapper">
 
   <select id="getAnalysisList" resultType="com.example.demo.domain.AnalysisRequest">
-    SELECT id, req_name as reqName, req_date as reqDate
+    SELECT id, req_name as reqName, req_date as reqDate, status
     FROM analysis_request
     ORDER BY req_date ASC;
   </select>
@@ -22,6 +22,11 @@
     </selectKey>
 
   </insert>
+
+  <update id="changeStatusToRun" parameterType="int">
+    UPDATE analysis_request SET status = 'run' WHERE id=#{id};
+  </update>
+
 
 
 </mapper>
