@@ -16,8 +16,40 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script>
-    function add() {
+    function addJSON() {
+        let name = $('#whitelistInput').val();
+        let regDate = new Date();
 
+        let jsonData = {
+            name : name,
+            regDate : regDate
+        };
+
+        if(name.trim() == ""){
+            alert("화이트리스트에 등록할 ID를 입력하세요");
+            return false;
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/request-whitelist',
+            processData: false,
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(jsonData),
+            success: function(responseJson){
+                let splitDate = responseJson.regDate.split("T");
+
+                let row = "";
+                row += "<tr><td>" + responseJson.name + "</td>";
+                row += "<td>" + splitDate[0] + "</td></tr>";
+
+                $("#whitelistTable > tbody:last").append(row);
+            },
+            error:function(request,status,error){
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            }
+        });
     }
 </script>
 <body id="page-top">
@@ -49,14 +81,14 @@
                     <div class="table-responsive">
                         <div class="input-group" text-align="center">
                             &nbsp;&nbsp;&nbsp; ID 입력 &nbsp;
-                            <input type="text" class="form-control" placeholder="" aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" id="whitelistInput" class="form-control" placeholder="" aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <input type="button" value="등록" class="btn btn-primary btn-block"
-                                       onClick="add()"/>
+                                       onClick="addJSON()"/>
                             </div>
                         </div>
                         <br/>
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table id="whitelistTable" class="table table-bordered" width="100%" cellspacing="0">
                             <thead>
                             <tr>
                                 <th>사용자 id</th>

@@ -34,7 +34,7 @@
                 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             }
         });
-    };
+    }
 </script>
 <body id="page-top">
 

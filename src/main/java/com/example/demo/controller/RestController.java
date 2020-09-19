@@ -28,7 +28,7 @@ public class RestController {
     @ResponseBody
     @RequestMapping(value="/request-analysis", method= RequestMethod.POST)
     public AnalysisRequest getAnalysisInfo(@RequestBody AnalysisRequest analysisRequest,
-                                           HttpServletResponse response, Model model) throws IOException, ParseException {
+                                           HttpServletResponse response) throws IOException {
         System.out.println("분석 요청:");
         System.out.println("setup.mode:" + setupMode);
 
@@ -57,15 +57,13 @@ public class RestController {
             return null;
         }
 
-        model.addAttribute("analysisRequest", analysisRequest);
-
         return analysisRequest;
     }
 
     @ResponseBody
     @RequestMapping(value="/request-status/{id}", method= RequestMethod.GET)
     public AnalysisRequest requestStatus(@PathVariable("id") final String id,
-                                        HttpServletResponse response, Model model) throws IOException, ParseException {
+                                        HttpServletResponse response) throws IOException {
         System.out.println("status를 run으로 변경");
 
         analysisService.changeStatusToRun(Integer.parseInt(id));
@@ -76,8 +74,24 @@ public class RestController {
             return null;
         }
 
-        model.addAttribute("analysisRequest", analysisRequest);
-
         return analysisRequest;
+    }
+
+    @ResponseBody
+    @RequestMapping(value="/request-whitelist", method= RequestMethod.POST)
+    public Whitelist whitelistRequest(@RequestBody Whitelist whitelist,
+                                      HttpServletResponse response) throws IOException {
+        System.out.println("화이트리스트 추가:");
+        System.out.println("name: " + whitelist.getName() + " regDate: " + whitelist.getRegDate());
+
+        // 입력받은 id 추가
+        whitelistService.insertWhitelist(whitelist);
+
+        if (whitelist == null) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return null;
+        }
+
+        return whitelist;
     }
 }
