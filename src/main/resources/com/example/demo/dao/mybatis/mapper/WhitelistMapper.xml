@@ -11,14 +11,9 @@
     ORDER BY reg_date ASC;
   </select>
 
-  <insert id="insertWhitelist" parameterType="com.example.demo.domain.Whitelist" >
+  <insert id="insertWhitelist" parameterType="com.example.demo.domain.Whitelist">
     INSERT INTO whitelist (name, reg_date)
     VALUES (#{name}, #{regDate});
-
-<!--    <selectKey keyProperty="id" resultType="int" order="AFTER">-->
-<!--      SELECT max(id) as id from analysis_request;-->
-<!--    </selectKey>-->
-
   </insert>
 
   <select id="isInWhitelist" parameterType="String" resultType="int">
