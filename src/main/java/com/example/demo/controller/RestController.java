@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.AnalysisRequest;
+import com.example.demo.domain.Whitelist;
 import com.example.demo.service.AnalysisService;
 import com.example.demo.service.WhitelistService;
 import javafx.beans.NamedArg;
