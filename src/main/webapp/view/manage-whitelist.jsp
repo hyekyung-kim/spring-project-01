@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Dashboard</title>
+    <title>Whitelist</title>
     <%@ include file="../view/include-top.jsp" %>
 </head>
 <style type="text/css">
@@ -39,12 +39,14 @@
             data: JSON.stringify(jsonData),
             success: function(responseJson){
                 let splitDate = responseJson.regDate.split("T");
-
                 let row = "";
                 row += "<tr><td>" + responseJson.name + "</td>";
                 row += "<td>" + splitDate[0] + "</td></tr>";
 
-                $("#whitelistTable > tbody:last").append(row);
+                $("#dataTable > tbody:last").append(row);
+
+                alert(responseJson.name + "이 화이트리스트에 추가되었습니다." +
+                    "\n[ " + splitDate[0] +" ]");
             },
             error:function(request,status,error){
                 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -88,7 +90,7 @@
                             </div>
                         </div>
                         <br/>
-                        <table id="whitelistTable" class="table table-bordered" width="100%" cellspacing="0">
+                        <table id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
                             <thead>
                             <tr>
                                 <th>사용자 id</th>

@@ -39,4 +39,16 @@ public class AnalysisRequest {
     public String getStatus() {
         return status;
     }
+
+    @Override
+    public String toString(){
+        String str = "";
+
+        str += "[ ID: " + getId() + " ";
+        str += "요청 이름: " + getReqName() + " ";
+        str += "날짜: " + getReqDate() + " ";
+        str += "상태: " + getStatus() + " ]";
+
+        return str;
+    }
 }

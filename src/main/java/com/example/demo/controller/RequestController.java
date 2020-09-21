@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.AnalysisRequest;
-import com.example.demo.domain.Whitelist;
 import com.example.demo.service.AnalysisService;
-import com.example.demo.service.WhitelistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -41,9 +39,7 @@ public class RequestController {
         List<AnalysisRequest> analysisList = analysisService.getAnalysisList();
 
         for(int i = 0; i < analysisList.size(); i++){
-            System.out.println(i + " analysisList: " + analysisList.get(i).getId() + " "
-                    + analysisList.get(i).getReqName() + " " + analysisList.get(i).getReqDate()
-                    + " " + analysisList.get(i).getStatus());
+            System.out.println(i + " analysisList: " + analysisList.get(i).toString());
         }
 
         mav.addObject("analysisList", analysisList);

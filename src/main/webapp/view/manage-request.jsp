@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Dashboard</title>
+    <title>Manage Request</title>
     <%@ include file="../view/include-top.jsp" %>
 </head>
 <style type="text/css">

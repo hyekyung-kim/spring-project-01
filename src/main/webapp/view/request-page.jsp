@@ -12,7 +12,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
+    <%@ include file="../view/include-top.jsp" %>
+
     <title>Request Page</title>
+
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script>
@@ -48,23 +51,36 @@
     };
 
 </script>
-<body>
-    <h2>분석 요청 페이지</h2>
 
-    <div class="form-group">
-        <label>요청자 이름</label>
-        <input type="text" id="reqName" name="reqName" />
-        <input type="button" id="reqButton" value="요청" onclick="requestJson()">
+<body class="bg-dark">
+
+    <div class="container">
+        <div class="card card-login mx-auto mt-5">
+            <div class="card-header">분석 요청 페이지</div>
+            <div class="card-body">
+                <div class="text-center mb-4">
+                    <h4>분석 요청 페이지</h4>
+                    <p>요청 결과</p>
+                    <div id="requestResult"></div>
+                </div>
+                <form>
+                    <div class="form-group">
+                        <div class="form-label-group">
+
+                            <input type="text" id="reqName" name="reqName" class="form-control" placeholder="요청자 이름" required="required" autofocus="autofocus" />
+                            <label for="reqName">요청자 이름</label>
+
+                        </div>
+                    </div>
+                    <input type="button" id="reqButton" value="분석 요청" onclick="requestJson()" class="btn btn-primary btn-block" />
+                </form>
+                <div class="text-center">
+                    <a href="/login" class="d-block small">Login Page</a>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <br/>
-    <input type="button" value="로그인 페이지"
-           onclick=" location.href='/login' "/>
-
-    <br/><br/>
-    <p>요청 결과</p>
-    <div id="requestResult"></div>
-
+    <%@ include file="../view/include-bottom.jsp" %>
 
 </body>
 </html>

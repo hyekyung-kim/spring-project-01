@@ -27,8 +27,7 @@ public class WhitelistController {
         List<Whitelist> whitelist = whitelistService.getWhitelist();
 
         for(int i = 0; i < whitelist.size(); i++){
-            System.out.println(i + " whitelist: " +
-                    whitelist.get(i).getName() + " " + whitelist.get(i).getRegDate());
+            System.out.println(i + " whitelist: " + whitelist.get(i).toString());
         }
 
         mav.addObject("whitelist", whitelist);
