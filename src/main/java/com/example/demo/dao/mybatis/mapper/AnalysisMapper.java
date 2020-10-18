@@ -15,5 +15,7 @@ public interface AnalysisMapper {
 
     void changeStatusToRun(int id);
 
+    void changeToGranted(int id);
+
     AnalysisRequest getAnalysisById(int id);
 }

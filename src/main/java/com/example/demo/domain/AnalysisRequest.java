@@ -7,6 +7,8 @@ public class AnalysisRequest {
     String reqName;
     Date reqDate;
     String status;
+    String filePath;
+    int grantCheck;
 
     public void setId(int id) {
         this.id = id;
@@ -40,6 +42,22 @@ public class AnalysisRequest {
         return status;
     }
 
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setGrantCheck(int grantCheck) {
+        this.grantCheck = grantCheck;
+    }
+
+    public int getGrantCheck() {
+        return grantCheck;
+    }
+
     @Override
     public String toString(){
         String str = "";
@@ -47,7 +65,9 @@ public class AnalysisRequest {
         str += "[ ID: " + getId() + " ";
         str += "요청 이름: " + getReqName() + " ";
         str += "날짜: " + getReqDate() + " ";
-        str += "상태: " + getStatus() + " ]";
+        str += "상태: " + getStatus() + " ";
+        str += "파일경로: " + getFilePath() + " ";
+        str += "권한여부: " + getGrantCheck() + " ]";
 
         return str;
     }

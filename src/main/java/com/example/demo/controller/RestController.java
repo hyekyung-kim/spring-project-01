@@ -78,6 +78,23 @@ public class RestController {
     }
 
     @ResponseBody
+    @RequestMapping(value="/request-grant/{id}", method= RequestMethod.GET)
+    public AnalysisRequest requestGrant(@PathVariable("id") final String id,
+                                         HttpServletResponse response) throws IOException {
+        System.out.println("grant를 1로 변경");
+
+        analysisService.changeToGranted(Integer.parseInt(id));
+        AnalysisRequest analysisRequest = analysisService.getAnalysisById(Integer.parseInt(id));
+
+        if (analysisRequest == null) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return null;
+        }
+
+        return analysisRequest;
+    }
+
+    @ResponseBody
     @RequestMapping(value="/request-whitelist", method= RequestMethod.POST)
     public Whitelist whitelistRequest(@RequestBody Whitelist whitelist,
                                       HttpServletResponse response) throws IOException {

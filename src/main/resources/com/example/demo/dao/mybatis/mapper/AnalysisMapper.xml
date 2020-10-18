@@ -6,15 +6,16 @@
 <mapper namespace="com.example.demo.dao.mybatis.mapper.AnalysisMapper">
 
   <select id="getAnalysisList" resultType="com.example.demo.domain.AnalysisRequest">
-    SELECT id, req_name as reqName, req_date as reqDate, status
+    SELECT id, req_name as reqName, req_date as reqDate, status,
+                file_path as filePath, grant_check as grantCheck
     FROM analysis_request
     ORDER BY req_date ASC;
   </select>
 
   <insert id="insertAnalysis" parameterType="com.example.demo.domain.AnalysisRequest">
-    INSERT INTO analysis_request (id, req_name, req_date, status)
+    INSERT INTO analysis_request (id, req_name, req_date, status, grant_check)
     SELECT case count(*) when 0 then 1 else max(id) + 1 end,
-            #{reqName}, #{reqDate}, #{status}
+            #{reqName}, #{reqDate}, #{status}, 0
     FROM analysis_request;
 
     <selectKey keyProperty="id" resultType="int" order="AFTER">
@@ -25,6 +26,10 @@
 
   <update id="changeStatusToRun" parameterType="int">
     UPDATE analysis_request SET status = 'run' WHERE id=#{id};
+  </update>
+
+  <update id="changeToGranted" parameterType="int">
+    UPDATE analysis_request SET grant_check = 1 WHERE id=#{id};
   </update>
 
   <select id="getAnalysisById" parameterType="int" resultType="com.example.demo.domain.AnalysisRequest">

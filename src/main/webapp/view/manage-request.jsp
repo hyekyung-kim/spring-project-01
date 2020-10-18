@@ -16,7 +16,7 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script>
-    <%--    JSON    --%>
+    <%--    JSON: 승인 버튼 클릭 시    --%>
     function statusJSON(id){
         let reqUrl = "/request-status/" + id;
         $.ajax({
@@ -29,6 +29,23 @@
                 let btn = document.getElementById(id);
                 btn.value="실행 중";
                 btn.disabled = true;
+            },
+            error:function(request,status,error){
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            }
+        });
+    }
+    <%--    JSON: 결과 승인 버튼 클릭 시    --%>
+    function grantJSON(id){
+        let reqUrl = "/request-grant/" + id;
+        $.ajax({
+            type: 'GET',
+            url: reqUrl,
+            processData: false,
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function(){
+
             },
             error:function(request,status,error){
                 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -87,6 +104,16 @@
                                         <c:choose>
                                             <c:when test="${analysis.status eq 'run'}">
                                                 <input type="button" id="${analysis.id}" value="실행 중" disabled="disabled"/>
+                                            </c:when>
+                                            <c:when test="${analysis.status eq 'complete'}">
+                                                분석 완료 &nbsp;&nbsp;
+                                                <c:if test="${analysis.grantCheck eq 0}">
+                                                    <input type="button" id="${analysis.id}" value="결과 승인" onclick="grantJSON('${analysis.id}')"/>
+                                                    <div id="grantChanged"></div>
+                                                </c:if>
+                                                <c:if test="${analysis.grantCheck eq 1}">
+                                                    결과 승인 완료
+                                                </c:if>
                                             </c:when>
                                             <c:otherwise>
                                                 <input type="button" id="${analysis.id}" value="승인" onclick="statusJSON('${analysis.id}')"/>

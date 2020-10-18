@@ -33,6 +33,11 @@ public class AnalysisServiceImpl implements AnalysisService {
     }
 
     @Override
+    public void changeToGranted(int id){
+        analysisDao.changeToGranted(id);
+    }
+
+    @Override
     public AnalysisRequest getAnalysisById(int id){
         return analysisDao.getAnalysisById(id);
     }
