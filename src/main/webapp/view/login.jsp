@@ -79,9 +79,13 @@
 
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
             </form:form>
-            <div class="form-group" align="center" style="float: none">
-                <input type="button" value="분석 요청" onClick="analysisSubmit()" class="btn btn-primary btn-block">
-                <input type="button" value="파일 요청" onClick="fileSubmit()" class="btn btn-primary btn-block">
+            <div class="form-group" align="center">
+                <div style="float: left; width: 49%";>
+                    <input type="button" value="분석 요청" onClick="analysisSubmit()" class="btn btn-primary btn-block">
+                </div>
+                <div style="float: right; width: 49%";>
+                    <input type="button" value="파일 요청" onClick="fileSubmit()" class="btn btn-primary btn-block">
+                </div>
             </div>
 
         </div>
