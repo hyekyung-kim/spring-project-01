@@ -45,7 +45,11 @@
             contentType: 'application/json',
             dataType: 'json',
             success: function(){
+                let btn = document.getElementById(id);
+                btn.style.display="none";
 
+                let text = document.getElementById('grantChanged' + id);
+                text.innerHTML="결과 승인 완료";
             },
             error:function(request,status,error){
                 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -108,8 +112,8 @@
                                             <c:when test="${analysis.status eq 'complete'}">
                                                 분석 완료 &nbsp;&nbsp;
                                                 <c:if test="${analysis.grantCheck eq 0}">
+                                                    <div id="grantChanged${analysis.id}" style="display:inline"></div>
                                                     <input type="button" id="${analysis.id}" value="결과 승인" onclick="grantJSON('${analysis.id}')"/>
-                                                    <div id="grantChanged"></div>
                                                 </c:if>
                                                 <c:if test="${analysis.grantCheck eq 1}">
                                                     결과 승인 완료
