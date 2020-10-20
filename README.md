@@ -4,7 +4,7 @@
 
 ### analysis_request 테이블<br>
 - file_path 컬럼 추가<br>
-- grant 컬럼은 예약어라 생성이 어려워 grant_check로 생성<br><br>
+- grant 컬럼은 예약어로, 생성이 어려워 grant_check로 생성<br><br>
 
 ### manage-request.jsp<br>
 - grantCheck 상태에 따른 버튼, 문구 표시 완료<br>
