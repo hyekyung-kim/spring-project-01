@@ -1,6 +1,6 @@
 # spring-project-01
 
-## 2020.10.19 수정사항
+## 2020.10.12-2020.10.23 수정사항
 
 ### analysis_request 테이블<br>
 - file_path 컬럼 추가<br>
