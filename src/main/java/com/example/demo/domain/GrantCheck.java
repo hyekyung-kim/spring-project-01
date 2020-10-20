@@ -1,5 +1,7 @@
 package com.example.demo.domain;
 
+import java.io.File;
+
 public class GrantCheck {
     String grant;
 
@@ -9,5 +11,14 @@ public class GrantCheck {
 
     public String getGrant() {
         return grant;
+    }
+
+    @Override
+    public String toString(){
+        String str = "";
+
+        str += "[ grant: " + getGrant() + " ]";
+
+        return str;
     }
 }

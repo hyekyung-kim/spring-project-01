@@ -38,7 +38,13 @@ function fileJSON(){
         dataType: 'json',
         data: {id: id},
         success: function(responseJson){
+
             $("#requestResult").html(JSON.stringify(responseJson));
+
+            if(responseJson.grant == 'accepted'){
+                let id = $('#reqId').val();
+                location.href="/download/" + id;
+            }
         },
         error:function(request,status,error){
             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -69,6 +75,7 @@ function fileJSON(){
                         </div>
                     </div>
                     <input type="button" id="reqButton" value="파일 요청" onclick="fileJSON()" class="btn btn-primary btn-block" />
+
                 </form>
                 <div class="text-center">
                     <a href="/login" class="d-block small">Login Page</a>

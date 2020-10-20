@@ -5,15 +5,13 @@ import com.example.demo.domain.GrantCheck;
 import com.example.demo.domain.Whitelist;
 import com.example.demo.service.AnalysisService;
 import com.example.demo.service.WhitelistService;
-import javafx.beans.NamedArg;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.text.ParseException;
+import java.io.*;
 
 @org.springframework.web.bind.annotation.RestController
 public class RestController {
@@ -129,14 +127,59 @@ public class RestController {
             return null;
         }
 
+        // 권한 여부 확인
         GrantCheck grantCheck = new GrantCheck();
         if(isGrant == 0){   // 승인 거부
             grantCheck.setGrant("rejected");
-        }else{              // 승인
+        }else {              // 승인
             grantCheck.setGrant("accepted");
         }
 
+        System.out.println(grantCheck.toString());
         return grantCheck;
+    }
+
+    @ResponseBody
+    @RequestMapping(value="/download/{id}", method= RequestMethod.GET)
+    public void download(@PathVariable("id") final String id,
+                                  HttpServletResponse response) throws IOException {
+        AnalysisRequest analysisRequest = analysisService.getAnalysisById(Integer.parseInt(id));
+
+        if (analysisRequest == null) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+
+        // 파일 다운
+        String path = analysisRequest.getFilePath();
+        File file = new File(path);
+        String fileName = file.getName();
+        String contentType = "text/plain";
+
+        System.out.println("full path: " + path);
+        System.out.println("file name: " + fileName);
+
+        response.setHeader("Content-Transfer-Encoding", "binary;");
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+        response.setHeader("Content-Type", contentType);
+
+        try {
+            OutputStream os = response.getOutputStream();
+            FileInputStream fis = new FileInputStream(path);
+
+            int count = 0;
+            byte[] bytes = new byte[1024];
+
+            while ((count = fis.read(bytes)) != -1 ) {
+                os.write(bytes, 0, count);
+            }
+
+            fis.close();
+            os.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("FileNotFoundException");
+        }
+
     }
 
 }
