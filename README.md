@@ -8,9 +8,9 @@
 
 ### manage-request.jsp<br>
 - grantCheck 상태에 따른 버튼, 문구 표시 완료<br>
-> -> ajax, REST<br>
+-> ajax, REST<br>
 - 0: 분석완료 (버튼: 결과 승인)<br>
->> -> 버튼 클릭 시, 1로 변경<br>
+-> 버튼 클릭 시, 1로 변경<br>
 - 1: 분석 완료 / 결과 승인 완료<br><br>
 
 ### request-file.jsp<br>
