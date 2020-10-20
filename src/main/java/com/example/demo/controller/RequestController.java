@@ -22,6 +22,9 @@ public class RequestController {
     @Value("request-page")
     private String requestPageName;
 
+    @Value("request-file")
+    private String requestFileName;
+
     @Autowired
     private AnalysisService analysisService;
 
@@ -29,6 +32,11 @@ public class RequestController {
     @RequestMapping(value="/request/page", method = RequestMethod.GET)
     public String requestPage(){
         return requestPageName;
+    }
+
+    @RequestMapping(value="/request/file", method = RequestMethod.GET)
+    public String requestFile(){
+        return requestFileName;
     }
 
     // 분석 요청 관리: index.jsp -> manage-request.jsp

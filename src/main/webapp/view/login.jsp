@@ -20,8 +20,11 @@
     }
 </style>
 <script>
-    function requestSubmit(){
+    function analysisSubmit(){
         location.href="/request/page";
+    }
+    function fileSubmit(){
+        location.href="/request/file";
     }
 </script>
 <body class="bg-dark">
@@ -76,8 +79,10 @@
 
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
             </form:form>
-
-            <input type="button" value="분석 요청" onClick="requestSubmit()" class="btn btn-primary btn-block">
+            <div class="form-group" align="center" style="float: none">
+                <input type="button" value="분석 요청" onClick="analysisSubmit()" class="btn btn-primary btn-block">
+                <input type="button" value="파일 요청" onClick="fileSubmit()" class="btn btn-primary btn-block">
+            </div>
 
         </div>
 

@@ -33,7 +33,9 @@
   </update>
 
   <select id="getAnalysisById" parameterType="int" resultType="com.example.demo.domain.AnalysisRequest">
-    SELECT * FROM analysis_request WHERE id=#{id};
+    SELECT id, req_name as reqName, req_date as reqDate, status,
+                file_path as filePath, grant_check as grantCheck
+    FROM analysis_request WHERE id=#{id};
   </select>
 
 

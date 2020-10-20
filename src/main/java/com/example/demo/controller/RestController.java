@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.AnalysisRequest;
+import com.example.demo.domain.GrantCheck;
 import com.example.demo.domain.Whitelist;
 import com.example.demo.service.AnalysisService;
 import com.example.demo.service.WhitelistService;
@@ -111,4 +112,31 @@ public class RestController {
 
         return whitelist;
     }
+
+    @ResponseBody
+    @RequestMapping(value="/request-file/{id}", method= RequestMethod.GET)
+    public GrantCheck fileRequest(@PathVariable("id") final String id,
+                                  HttpServletResponse response) throws IOException {
+
+        AnalysisRequest analysisRequest = analysisService.getAnalysisById(Integer.parseInt(id));
+        int isGrant = analysisRequest.getGrantCheck();
+
+        System.out.println("파일 요청 grant: " + isGrant);
+        System.out.println("analysisRequest: " + analysisRequest.toString());
+
+        if (analysisRequest == null) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return null;
+        }
+
+        GrantCheck grantCheck = new GrantCheck();
+        if(isGrant == 0){   // 승인 거부
+            grantCheck.setGrant("rejected");
+        }else{              // 승인
+            grantCheck.setGrant("accepted");
+        }
+
+        return grantCheck;
+    }
+
 }
