@@ -13,6 +13,11 @@
 >> -> 버튼 클릭 시, 1로 변경<br>
 - 1: 분석 완료 / 결과 승인 완료<br><br>
 
+### request-file.jsp<br>
+-파일 요청 시, restController에서 id에 해당하는 grant값 확인<br>
+-GrantCheck 객체 반환<br>
+> grantCheck: 0 -> grant: "rejected"<br>
+> grantCheck: 1 -> grant: "accepted"<br><br>
 
 ## 환경
 개발환경: IntelliJ IDEA 2020.2 <br>
