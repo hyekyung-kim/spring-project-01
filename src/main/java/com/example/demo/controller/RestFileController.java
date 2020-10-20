@@ -43,7 +43,6 @@ public class RestFileController {
         return grantCheck;
     }
 
-    @ResponseBody
     @RequestMapping(value="/download/{id}", method= RequestMethod.GET)
     public void download(@PathVariable("id") final String id,
                          HttpServletResponse response) throws IOException {
@@ -56,9 +55,10 @@ public class RestFileController {
 
         // 파일 다운
         String path = analysisRequest.getFilePath();
+        String contentType = "text/plain";
+
         File file = new File(path);
         String fileName = file.getName();
-        String contentType = "text/plain";
 
         System.out.println("full path: " + path);
         System.out.println("file name: " + fileName);
@@ -83,6 +83,5 @@ public class RestFileController {
         } catch (FileNotFoundException ex) {
             System.out.println("FileNotFoundException");
         }
-
     }
 }
