@@ -16,8 +16,9 @@
 ### request-file.jsp & RestFileController<br>
 -파일 요청 시, restController에서 id에 해당하는 grant값 확인<br>
 -GrantCheck 객체 반환<br>
-> grantCheck: 0 -> grant: "rejected"<br>
-> grantCheck: 1 -> grant: "accepted"<br>
+ > grantCheck: 0 -> grant: "rejected"<br>
+ > grantCheck: 1 -> grant: "accepted"<br>
+
 -grant가 accepted이면 "/download/{id}" url 호출<br>
 -RestFileController: file_path 경로의 txt파일 다운로드 수행<br>
 <br><br>
