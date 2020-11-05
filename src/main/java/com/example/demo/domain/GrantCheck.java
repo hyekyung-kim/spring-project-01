@@ -1,7 +1,5 @@
 package com.example.demo.domain;
 
-import java.io.File;
-
 public class GrantCheck {
     String grant;
 

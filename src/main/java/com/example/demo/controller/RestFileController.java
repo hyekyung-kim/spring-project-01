@@ -4,10 +4,7 @@ import com.example.demo.domain.AnalysisRequest;
 import com.example.demo.domain.GrantCheck;
 import com.example.demo.service.AnalysisService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -19,30 +16,33 @@ public class RestFileController {
 
     @ResponseBody
     @RequestMapping(value="/request-file/{id}", method= RequestMethod.GET)
-    public GrantCheck fileRequest(@PathVariable("id") final String id,
-                                  HttpServletResponse response) throws IOException {
+    public File fileRequest(@PathVariable("id") final String id,
+                            HttpServletResponse response) throws IOException {
 
         AnalysisRequest analysisRequest = analysisService.getAnalysisById(Integer.parseInt(id));
-        int isGrant = analysisRequest.getGrantCheck();
-
-        System.out.println("파일 요청 grant: " + isGrant);
 
         if (analysisRequest == null) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
             return null;
         }
 
-        // 권한 여부 확인
+        int isGrant = analysisRequest.getGrantCheck();
         GrantCheck grantCheck = new GrantCheck();
-        if(isGrant == 0){   // 승인 거부
+        if (isGrant == 0) {   // 승인 거부
             grantCheck.setGrant("rejected");
-        }else {              // 승인
+            return null;
+        } else {              // 승인
             grantCheck.setGrant("accepted");
-        }
 
-        return grantCheck;
+            // 파일 다운
+            String path = analysisRequest.getFilePath(); // 전체 파일 경로
+            File file = new File(path);       // DB에서 받아온 경로로 파일 객체 생성
+
+            return file;
+        }
     }
 
+    @ResponseBody
     @RequestMapping(value="/download/{id}", method= RequestMethod.GET)
     public void download(@PathVariable("id") final String id,
                          HttpServletResponse response) throws IOException {
@@ -52,15 +52,13 @@ public class RestFileController {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
-
         // 파일 다운
-        String path = analysisRequest.getFilePath();
+        String filePath = analysisRequest.getFilePath();
+        File file = new File(filePath);
+        String fileName = file.getName();
         String contentType = "text/plain";
 
-        File file = new File(path);
-        String fileName = file.getName();
-
-        System.out.println("full path: " + path);
+        System.out.println("full path: " + filePath);
         System.out.println("file name: " + fileName);
 
         response.setHeader("Content-Transfer-Encoding", "binary;");
@@ -69,7 +67,7 @@ public class RestFileController {
 
         try {
             OutputStream os = response.getOutputStream();
-            FileInputStream fis = new FileInputStream(path);
+            FileInputStream fis = new FileInputStream(filePath);
 
             int count = 0;
             byte[] bytes = new byte[1024];

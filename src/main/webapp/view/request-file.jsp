@@ -35,15 +35,12 @@ function fileJSON(){
         url: reqUrl,
         processData: false,
         contentType: 'application/json',
-        dataType: 'json',
         data: {id: id},
-        success: function(responseJson){
-
-            $("#requestResult").html(JSON.stringify(responseJson));
-
-            if(responseJson.grant == 'accepted'){
-                let id = $('#reqId').val();
+        success: function(filePath){
+            if(filePath){
                 location.href="/download/" + id;
+            }else{
+                alert("파일 없음");
             }
         },
         error:function(request,status,error){
